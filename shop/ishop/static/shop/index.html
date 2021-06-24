@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<<<<<<< HEAD
+  <title>IKEA Shop | Shop</title>
+=======
+  <title>Shop | Shop</title>
+>>>>>>> d59deaac0a29e16678e0f5085c7249507fedb27e
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <label>
+            <select name="category" onchange="(window.location = this.options[this.selectedIndex].value);">
+                <option value ="http://127.0.0.1:8000/shop">Select category</option>
+                <option value ="http://127.0.0.1:8000/shop">All</option>
+                <option value ="http://127.0.0.1:8000/shop/fences">Exterior</option>
+                <option value ="http://127.0.0.1:8000/shop/ground_coverage">Ground Coverage</option>
+                <option value ="http://127.0.0.1:8000/shop/fences">Fences</option>
+                <option value ="http://127.0.0.1:8000/shop/interior">Interior</option>
+                <option value ="http://127.0.0.1:8000/shop/plumbing">Plumbing</option>
+                <option value ="http://127.0.0.1:8000/shop/furniture">Furniture</option>
+                <option value ="http://127.0.0.1:8000/shop/light">Light</option>
+                <option value ="http://127.0.0.1:8000/shop/floor_coverage">Floor Coverage</option>
+                <option value ="http://127.0.0.1:8000/shop/paint">Paint</option>
+            </select>
+        </label>
+        {% for product in object_list %}
+      <div class="col-md-4 col-sm-12 col-lg-3 m-1">
+              <div class="card" style='width:100%; height:300px;'>
+                <img src="{{ product.img.name }}" style="width:100%;" class="card-img-top" alt="{{ product.name }}">
+                      <div class="card-body">
+                        <h5 class="card-title"> {{ product.name }}</h5>
+                        <p class="card-text">{{ product.preview_text }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                      </div>
+                  <div class='card-footer text-center'>
+                      <a href="cart/{{ product.slug }}" class="btn btn-success">Add to Cart</a>
+                      <a href="remove/{{ product.slug }}" class="btn btn-danger">Remove from Cart</a>
+                  </div>
+               </div>
+        </div>
+      {% endfor %}
+  </div>
+  </div>
+</body>
+</html>

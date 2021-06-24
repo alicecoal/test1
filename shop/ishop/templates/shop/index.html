@@ -1,0 +1,46 @@
+{% extends "../home.html" %}
+{% block content %}
+      {% for product in object_list %}
+      <div class="col-md-4 col-sm-12 col-lg-3 m-1">
+              <div class="card" style='width:100%; height:500px;'>
+                <a href="/shop/{{ product.slug }}">
+                <img src="{{ product.img.url }}" style="width:100%; height: 255px; border-radius: 10%;" class="card-img-top" alt="{{ product.name }}">
+                </a>
+                      <div class="card-body">
+                        <h5 class="card-title"> {{ product.name }}</h5>
+                        <p class="card-text">{{ product.preview_text }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                      </div>
+                  <div class='card-footer text-center' style="height: 130px;">
+                      <a href="cart/{{ product.slug }}" class="btn btn-success btn-jittery">Add to Cart</a>
+                      <a href="remove/{{ product.slug }}" class="btn btn-danger btn-close">Remove from Cart</a>
+                      {% if product.seller == request.user.profile.get_profile %}
+                        <a href="edit/{{ product.slug }}/{{ product.category }}" class="btn btn-warning btn-jelly">Edit</a>
+                          <a href="delete/{{ product.slug }}" class="btn btn-dark btn-open">Remove</a>
+                      {% endif %}
+                  </div>
+               </div>
+        </div>
+    {% endfor %}
+<div id="panel" class="d-none d-lg-block hide-on-portrait"> Parameters
+    <div class="d-none d-lg-block" id="hidden_panel">
+        <select class="form-control-select" name="category" onchange="(window.location = this.options[this.selectedIndex].value);">
+            <option value ='{% url "shop:home" %}'>Select category</option>
+            <option value ='{% url "shop:home" %}'>All</option>
+            <option value ='{% url "shop:exterior" %}'>Exterior</option>
+            <option value ='{% url "shop:ground_coverage" %}'>Ground Coverage</option>
+            <option value ='{% url "shop:fence" %}'>Fences</option>
+            <option value ='{% url "shop:interior" %}'>Interior</option>
+            <option value ='{% url "shop:plumbing" %}'>Plumbing</option>
+            <option value ='{% url "shop:furniture" %}'>Furniture</option>
+            <option value ='{% url "shop:light" %}'>Light</option>
+            <option value ='{% url "shop:floor_coverage" %}'>Floor Coverage</option>
+            <option value ='{% url "shop:paint" %}'>Paint</option>
+        </select>
+        {% if request.user.profile.get_profile.is_seller %}
+            <a href='{% url "shop:add" %}' class="btn btn-success btn-small active" role="button" aria-pressed="true">Add product</a>
+        {% endif %}
+        <a href='{% url "shop:export" %}' class="btn btn-primary btn-small active" role="button" aria-pressed="true">Export to Excel</a>
+    </div>
+  </div>
+{% endblock %}

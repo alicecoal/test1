@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "home.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+ <div class="col-lg-6">
+	<div class="text-container">
+	    <h1>Dashboard<br></h1>
+	    <h2>Welcome to your dashboard</h2>
+	    <p class="p-large">Your name, {{ request.user }}<br>
+	    	E-mail: {{ request.user.email }}<br>
+	    	Country: {{ request.user.profile.country }}<br>
+	    	Admin: {{ request.user.is_staff }}<br>
+	    </p>
+	</div>
+</div> <!-- end of col -->
+
+{% endif %}
+{% endblock %}
+</html>

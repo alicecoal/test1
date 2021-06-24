@@ -1,0 +1,11 @@
+{% extends "home.html" %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <table class="table table-borderless center text-white mx-4">
+        {{ form.as_table }}
+    </table>
+
+  <button type="submit" class="btn-success btn-pulse rounded-pill mx-5 btn-lg">Add</button>
+</form>
+{% endblock %}

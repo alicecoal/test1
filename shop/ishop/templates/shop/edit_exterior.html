@@ -1,0 +1,13 @@
+{% extends "home.html" %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+{{ form.as_table }}
+<div class="fieldWrapper">
+    {{ form.subject.errors }}
+    <label for="{{ form.subject.id_for_label }}">Email subject:</label>
+    {{ form.subject }}
+</div>
+  <button type="submit">Add</button>
+</form>
+{% endblock %}

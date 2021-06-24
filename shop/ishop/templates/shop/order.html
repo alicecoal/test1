@@ -1,0 +1,39 @@
+{% extends "../home.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Shop | Orders</title>
+</head>
+{% block content %}
+<body>
+  <div class="container">
+    <div class="row">
+      {% for order_itm in order_list %}
+        {% if request.user.profile == order_itm.user %}
+          <div class="col-md-4 col-sm-12 col-lg-3 m-1">
+                  <div class="card" style='width:100%; height:300px;'>
+                          <div class="card-body">
+                            <h5 class="card-title"> {{ order_itm.user }}</h5>
+                            <p class="card-ordered">Date of order: {{ order_itm.created }}</p>
+                            <p class="card-text">Is already ordered: {{ order_itm.ordered }}</p>
+                            <p class="card-itm">Products in order: {{ order_itm.show_order }}</p>
+                            <p class="card-itm">Total price: {{ order_itm.show_price }}</p>
+                          </div>
+                      <div class='card-footer text-center'>
+                          <a href="buy" class="btn btn-success">Buy</a>
+                          <a href="delete_order" class="btn btn-danger">Remove</a>
+                      </div>
+                   </div>
+            </div>
+          {% endif %}
+      {% endfor %}
+  </div>
+  </div>
+</body>
+{% endblock %}
+</html>
